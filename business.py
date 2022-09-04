@@ -80,7 +80,6 @@ def login(username,password1):
     user = driver.find_element('id','input-1')
     user.send_keys(username)
 
-
     password = driver.find_element('id','input-2')
     password.send_keys(password1)
 
