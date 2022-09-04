@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, request,jsonify
+from flask import render_template, request,jsonify,redirect,url_for
 
 import random
 import json
@@ -23,26 +23,25 @@ def hello_world():
     return render_template("login.html")
 
 
-@app.route("/submit", methods=["GET","POST"])
-def submit():
-    name = request.form.get("feature-title")
-    desc  = request.form.get("short_summary")
+def get_last_user_id():
 
-    col.insert_one({ "Name": name , "description": desc })
-    for x in col.find():
-        
-       
+    last_user_id      = col.find().sort([('user_id',-1)]).limit(1)
+    
+    try:
+        last_user_id = last_user_id[0]['user_id']
+    except:
+        last_user_id = 0
 
-        val=x['Name']
-        val2=x['description'] 
-    result = {
-        'Name' : val ,
-        'description' : val2
-    }  
-    # {{ org.backgroundInfo | replace(‘\n’, ‘<br>’) }} 
+    # user_id = last_user_id + 1
 
-    # return json.dumps(result) 
-    return render_template('result.html', result = result)
+    return last_user_id
+
+
+@app.route('/signup', methods=['GET'])
+def page_signup_get():  
+
+    return render_template("signup.html")  
+
 
 @app.route('/signup', methods=['POST'])
 def page_signup_post():    
@@ -51,7 +50,11 @@ def page_signup_post():
 
     password    = request.values.get('password')
 
+    user_id = get_last_user_id()
+    new_user_id = user_id + 1
     data = {
+
+        "user_id"  : new_user_id,
         "username" : username,
         "password" : password,
         "ismentor" : False
@@ -61,12 +64,44 @@ def page_signup_post():
 
     return "Successfully signed up"
 
-# @app.route('/login', methods=['POST'])
-# def page_login_post():   
+# @app.route('/error-page', methods=['GET'])
+# def error_page():   
 
-#     username    = request.values.get('username')
+#     return render_template("error.html")
 
-#     password    = request.values.get('password')
+@app.route('/login', methods=['POST'])
+def page_login_post():   
+
+    username    = request.values.get('username')
+
+    password    = request.values.get('password')
+
+    user = col.find_one({"username":username})
+
+    user_id = user["user_id"]  
+
+    print("********************8",user["password"])
+
+    if user["password"] == password:
+        if user["ismentor"]:
+            
+            return redirect(f'/mentor/{user_id}')
+            
+        else:
+            return redirect(f'/mentee/{user_id}')
+    
+    else:
+        return render_template("error.html")
+
+@app.route('/mentor/<user_id>', methods=['GET'])
+def mentor_page(user_id):   
+
+    return render_template("mentor.html")
+
+@app.route('/mentee/<user_id>', methods=['GET'])
+def mentee_page(user_id):   
+
+    return render_template("mentee.html")
 
 @app.route('/model',methods=['GET'])
 def model():
