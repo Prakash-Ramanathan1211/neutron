@@ -79,15 +79,15 @@ def leetcode():
 
 @app.route('/codechef/ranking',methods=['GET'])
 def codechef1():
-    return render_template('codechef-ranking.html')
+    return render_template('cc-ranking.html')
 
 @app.route('/codechef/rating',methods=['GET'])
 def codechef2():
-    return render_template('codechef-rating.html')
+    return render_template('cc-rating.html')
 
 @app.route('/codechef/solvecount',methods=['GET'])
 def codechef3():
-    return render_template('codechef-solvecount.html')
+    return render_template('cc-solvecount.html')
 
 @app.route('/leetcode/difficulty',methods=['GET'])
 def leetcode1():

@@ -29,20 +29,33 @@
   cursor: pointer;
 }
 
+/* Style The Dropdown Button */
+.dropbtn {
+  background-color: #f8f8f8;
+  color: rgb(0, 0, 0);
+  padding: 3px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+/* The container <div> - needed to position the dropdown content */
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
+/* Dropdown Content (Hidden by Default) */
 .dropdown-content {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  
   z-index: 1;
 }
 
+/* Links inside the dropdown */
 .dropdown-content a {
   color: black;
   padding: 12px 16px;
@@ -50,15 +63,20 @@
   display: block;
 }
 
+/* Change color of dropdown links on hover */
 .dropdown-content a:hover {background-color: #f1f1f1}
 
+/* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
 }
 
+/* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-  color: rgb(65, 65, 203);
+  background-color: #ffffff;
 }
+
+
 
       
         </style>
@@ -66,30 +84,55 @@
 <body>
    
 
-      <section>
-        <div style="background-color:whitesmoke;height: 80px;">
-            <div class="container" style="max-width:95%">
-                <div class="row">
-                <div class="col-sm-6">
-                    <p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Neutron</p>
-                </div>
-                <div class="col-sm-6">
-                    
-                    <div class="dropdown" style="float: right;padding-top: 13px;">
-                        <a href="#" style="outline: none;color: black;">Home&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-                        <a href="#" style="outline: none;color: black;">About&nbsp;&nbsp;</a>
-                        <button class="dropbtn">Dropdown</button>
-                        <div class="dropdown-content">
-                        <a href="#">Link 1</a>
-                        <a href="#">Link 2</a>
-                        <a href="#">Link 3</a>
-                        </div>
-                      </div>
-                </div>
+  <section>
+    <div style="background-color:whitesmoke;height: 80px;">
+        <div class="container" style="max-width:95%">
+            <div class="row">
+            <div class="col-sm-6">
+                <p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Neutron</p>
             </div>
+            <div class="col-sm-6">
+                
+              <div class="dropdown">
+                <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Codechef&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
+                <div class="dropdown-content">
+                  <a href="/codechef/rating">Rating</a>
+                  <a href="/codechef/ranking">Ranking</a>
+                  <a href="/codechef/solvecount">Solvecount</a>
+                </div>
+              </div>
+              <div class="dropdown">
+                <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Codeforces&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
+                <div class="dropdown-content">
+                  <a href="/codeforces/rating">Rating</a>
+                
+                </div>
+              </div>
+              <div class="dropdown">
+                <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Hackerrank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
+                <div class="dropdown-content">
+                  <a href="#">Rating</a>
+                </div>
+              </div>
+              <div class="dropdown">
+                <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Hackerearth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
+                <div class="dropdown-content">
+                  <a href="#">Rating</a>
+                </div>
+              </div>
+      
+            <div class="dropdown">
+              <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Leetcode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
+              <div class="dropdown-content">
+                <a href="/leetcode/difficulty">Difficulty</a>
+              </div>
             </div>
+          </div>
         </div>
-      </section>
+        </div>
+    </div>
+  </section>
+  
       
     <h1 style="font-family: 'Staatliches', cursive;font-size: 500px;text-align: center;">Neutron</h1>
       <br><br>
