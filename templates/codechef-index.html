@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.2.1/highcharts.js" integrity="sha512-EjSSnefV8NrJ2zUU++TBkLjuj8QhVBbJn084l0xkHN1bL0l7a7d+bU/nJfwp60Dym+KPOxHd2yv1tTAsW0YnXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js" integrity="sha512-1Gn7//DzfuF67BGkg97Oc6jPN6hqxuZXnaTpC9P5uw8C6W4yUNj5hoS/APga4g1nO2X6USBb/rXtGzADdaVDeA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<style>
+     body {
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+          background-color: white;
+          z-index: 0;
+        }
+        
+        .dropbtn {
+  background-color: whitesmoke;
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  color: rgb(65, 65, 203);
+}
+</style>
+</head>
+
+<body>
+    <div class="container" id="container"></div>
+    <div class="container" id="container2"></div>
+    <script>
+        window.onload=()=>{
+
+const baseUrl   =   "https://competitive-coding-api.herokuapp.com/api/codechef/"
+
+
+    let users   =   ["mohithaakash17","abhijeet_ar"]
+
+    let ranks  =   []
+    let solveCounts=[]
+    for(let user of users){
+        fetch(baseUrl+user)
+            .then(res=>res.json())
+            .then(res=>{
+                console.log(res)
+                let name    =   res.user_details.name;
+                let rank    =   res.rating
+                let count   =   [res.fully_solved.count,res.partially_solved.count]
+                // names.push(name)
+    
+                ranks.push(
+                    {
+                        name    :   name,
+                        data    :   [rank]
+                    }
+                )
+                solveCounts.push(
+                    {
+                        name    :   name,
+                        data    :   [...count]
+                    }
+                )
+                
+            }).then(()=>{
+                Highcharts.chart('container', {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'SolveCount'
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Fruit eaten'
+                        }
+                    },
+                
+                    series: [
+                        ...ranks
+                    ]
+            });
+            Highcharts.chart('container2', {
+                    chart: {
+                        type: 'bar'
+                    },
+                    title: {
+                        text: 'SolveCount'
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Fruit eaten'
+                        }
+                    },
+                    series: [
+                        ...solveCounts
+                    ]
+            });
+            })
+            .catch(
+                err=>console.log(err)
+            );
+    }
+    
+
+
+        }   
+</script>
+<script>
+    /* When the user clicks on the button, 
+    toggle between hiding and showing the dropdown content */
+    function myFunction() {
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+    
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(e) {
+      if (!e.target.matches('.dropbtn')) {
+      var myDropdown = document.getElementById("myDropdown");
+        if (myDropdown.classList.contains('show')) {
+          myDropdown.classList.remove('show');
+        }
+      }
+    }
+    </script>
+
+</body>
+
+
+<head>
+
+    <!-- <script src="custom.src.js"></script> -->
+   <!-- <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
+
+</head>
+<body>
+    
+</html>

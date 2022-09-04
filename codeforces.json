@@ -1,0 +1,178 @@
+{
+    "status": "Success",
+    "username": "abhijeet_ar",
+    "platform": "Codeforces",
+    "rating": 1502,
+    "max rating": 1502,
+    "rank": "specialist",
+    "max rank": "specialist",
+    "contests": [{
+        "Contest": "Round #650",
+        "Rank": "522",
+        "Solved": "4",
+        "Rating Change": "+123",
+        "New Rating": "1502",
+        "ContestNo": 650
+    }, {
+        "Contest": "Round #642",
+        "Rank": "4694",
+        "Solved": "3",
+        "Rating Change": "-1",
+        "New Rating": "1379",
+        "ContestNo": 642
+    }, {
+        "Contest": "Round #640",
+        "Rank": "3227",
+        "Solved": "4",
+        "Rating Change": "+8",
+        "New Rating": "1380",
+        "ContestNo": 640
+    }, {
+        "Contest": "Round #638",
+        "Rank": "6579",
+        "Solved": "2",
+        "Rating Change": "+7",
+        "New Rating": "1372",
+        "ContestNo": 638
+    }, {
+        "Contest": "Round #637",
+        "Rank": "5887",
+        "Solved": "2",
+        "Rating Change": "+23",
+        "New Rating": "1365",
+        "ContestNo": 637
+    }, {
+        "Contest": "Round #636",
+        "Rank": "4989",
+        "Solved": "3",
+        "Rating Change": "+18",
+        "New Rating": "1342",
+        "ContestNo": 636
+    }, {
+        "Contest": "Round #634",
+        "Rank": "4705",
+        "Solved": "4",
+        "Rating Change": "+33",
+        "New Rating": "1324",
+        "ContestNo": 634
+    }, {
+        "Contest": "Round #629",
+        "Rank": "6764",
+        "Solved": "2",
+        "Rating Change": "-4",
+        "New Rating": "1291",
+        "ContestNo": 629
+    }, {
+        "Contest": "Round #624",
+        "Rank": "1819",
+        "Solved": "3",
+        "Rating Change": "+73",
+        "New Rating": "1295",
+        "ContestNo": 624
+    }, {
+        "Contest": "Round #617",
+        "Rank": "2562",
+        "Solved": "3",
+        "Rating Change": "+111",
+        "New Rating": "1222",
+        "ContestNo": 617
+    }, {
+        "Contest": "Round #616",
+        "Rank": "6686",
+        "Solved": "0",
+        "Rating Change": "-105",
+        "New Rating": "1111",
+        "ContestNo": 616
+    }, {
+        "Contest": "Round #612",
+        "Rank": "3184",
+        "Solved": "1",
+        "Rating Change": "+27",
+        "New Rating": "1236",
+        "ContestNo": 612
+    }, {
+        "Contest": "Round #611",
+        "Rank": "3211",
+        "Solved": "2",
+        "Rating Change": "-8",
+        "New Rating": "1232",
+        "ContestNo": 611
+    }, {
+        "Contest": "Round #610",
+        "Rank": "2946",
+        "Solved": "2",
+        "Rating Change": "+44",
+        "New Rating": "1240",
+        "ContestNo": 610
+    }, {
+        "Contest": "Round #605",
+        "Rank": "3338",
+        "Solved": "2",
+        "Rating Change": "+5",
+        "New Rating": "1196",
+        "ContestNo": 605
+    }, {
+        "Contest": "Round #601",
+        "Rank": "4153",
+        "Solved": "1",
+        "Rating Change": "-31",
+        "New Rating": "1191",
+        "ContestNo": 601
+    }, {
+        "Contest": "Round #598",
+        "Rank": "4751",
+        "Solved": "1",
+        "Rating Change": "-35",
+        "New Rating": "1222",
+        "ContestNo": 598
+    }, {
+        "Contest": "Round #595",
+        "Rank": "2856",
+        "Solved": "3",
+        "Rating Change": "+38",
+        "New Rating": "1249",
+        "ContestNo": 595
+    }, {
+        "Contest": "Round #593",
+        "Rank": "3608",
+        "Solved": "2",
+        "Rating Change": "+42",
+        "New Rating": "1211",
+        "ContestNo": 593
+    }, {
+        "Contest": "Round #592",
+        "Rank": "4455",
+        "Solved": "2",
+        "Rating Change": "+16",
+        "New Rating": "1078",
+        "ContestNo": 592
+    }, {
+        "Contest": "Round #590",
+        "Rank": "6429",
+        "Solved": "1",
+        "Rating Change": "-70",
+        "New Rating": "1170",
+        "ContestNo": 590
+    }, {
+        "Contest": "Round #589",
+        "Rank": "4961",
+        "Solved": "1",
+        "Rating Change": "-4",
+        "New Rating": "1240",
+        "ContestNo": 589
+    }, {
+        "Contest": "Round #587",
+        "Rank": "3573",
+        "Solved": "2",
+        "Rating Change": "-63",
+        "New Rating": "1244",
+        "ContestNo": 587
+    }, {
+        "Contest": "Round #577",
+        "Rank": "4821",
+        "Solved": "0",
+        "Rating Change": "-130",
+        "New Rating": "1370",
+        "ContestNo": 577
+    }]
+}

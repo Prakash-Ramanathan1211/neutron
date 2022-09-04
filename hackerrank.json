@@ -1,0 +1,36 @@
+{
+    "users": [
+        {
+            "mohithaakash17": {
+                "Weather Observation Station 4": 10.0,
+                "Weather Observation Station 3": 10.0,
+                "Weather Observation Station 1": 15.0,
+                "New Companies": 0.0,
+                "Weather Observation Station 12": 15.0,
+                "Employee Salaries": 10.0,
+                "Japanese Cities' Names": 10.0,
+                "Japanese Cities' Attributes": 10.0,
+                "Select By ID": 10.0,
+                "Select All": 10.0,
+                "Revising the Select Query II": 10.0,
+                "Revising the Select Query I": 10.0,
+                "Number Line Jumps": 10.0,
+                "The Maximum Subarray": 16.67,
+                "Sparse Arrays": 25.0,
+                "Circular Array Rotation": 20.0,
+                "Insert a Node at the Tail of a Linked List": 5.0,
+                "Climbing the Leaderboard": 12.0,
+                "Java Stdin and Stdout II": 10.0,
+                "Java If-Else": 10.0,
+                "Java Stdin and Stdout I": 5.0,
+                "Pointers in C": 10.0,
+                "Flatland Space Stations": 21.36,
+                "Super Reduced String": 10.0,
+                "Sum of Digits of a Five Digit Number": 15.0,
+                "For Loop in C": 10.0,
+                "Sum and Difference of Two Numbers": 5.0,
+                "Solve Me First": 1.0
+            }
+        }
+    ]
+}

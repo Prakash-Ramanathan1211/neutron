@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.2.1/highcharts.js" integrity="sha512-EjSSnefV8NrJ2zUU++TBkLjuj8QhVBbJn084l0xkHN1bL0l7a7d+bU/nJfwp60Dym+KPOxHd2yv1tTAsW0YnXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fetch/3.6.2/fetch.min.js" integrity="sha512-1Gn7//DzfuF67BGkg97Oc6jPN6hqxuZXnaTpC9P5uw8C6W4yUNj5hoS/APga4g1nO2X6USBb/rXtGzADdaVDeA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div class="container" id="container"></div>
+    <div class="container" id="container2"></div>
+    <script>
+        window.onload=()=>{
+
+const baseUrl   =   "https://competitive-coding-api.herokuapp.com/api/codechef/"
+
+
+    let users   =   ["reejubhai","rudra56","petr","lyrically","maikyh"]
+
+    let ratings  =   []
+    let names     =   []
+    for(let user of users){
+        fetch(baseUrl+user)
+            .then(res=>res.json())
+            .then(res=>{
+                console.log(res)
+                let name    =   res.user_details.name;
+                let rating    =   res.rating
+                let count   =   [res.fully_solved.count,res.partially_solved.count]
+                // names.push(name)
+                names.push(name)
+                ratings.push(
+                    // {
+                    //     name    :   name,
+                    //     data    :   [rating]
+                    // }
+                    [name,rating]
+                )
+                
+            }).then(()=>{
+                Highcharts.chart('container', {
+                    chart: {
+                        type:'line'
+                        },
+                        title: {
+                        text: 'Rating'
+                    },
+                        xAxis: {
+                            tickInterval: 1,
+                           
+                            labels: {
+                                enabled: true,
+                                formatter: function() { return ratings[this.value][0];},
+                            }
+                        },
+                        yAxis:{
+                            title:{
+                                text:'Ratings',
+                            },
+                        },
+                        series: [{
+                            data: ratings     
+                        }]
+            });
+           
+            })
+            .catch(
+                err=>console.log(err)
+            );
+    }
+    
+
+
+        }   
+</script>
+</body>
+
+
+<head>
+
+    <!-- <script src="custom.src.js"></script> -->
+   <!-- <script src="https://code.highcharts.com/modules/accessibility.js"></script> -->
+
+</head>
+<body>
+    
+</html>
