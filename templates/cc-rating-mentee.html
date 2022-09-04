@@ -77,7 +77,6 @@
 }
 
 
-
       
         </style>
 </head>
@@ -96,28 +95,28 @@
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Codechef&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/codechef/rating">Rating</a>
-                  <a href="/codechef/ranking">Ranking</a>
-                  <a href="/codechef/solvecount">Solvecount</a>
+                  <a href="/codechef/rating/mentee">Rating</a>
+                  <a href="/codechef/ranking/mentee">Ranking</a>
+                  <a href="/codechef/solvecount/mentee">Solvecount</a>
                 </div>
               </div>
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Codeforces&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/codeforces/rating">Rating</a>
+                  <a href="/codeforces/rating/mentee">Rating</a>
                 
                 </div>
               </div>
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Hackerrank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/hackerrank/stats">Rating</a>
+                  <a href="/hackerrank/stats/mentee">Rating</a>
                 </div>
               </div>
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Hackerearth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/hackerearth/stats">Stats</a>
+                  <a href="/hackerearth/stats/mentee">Stats</a>
                 </div>
               </div>
       
@@ -125,15 +124,13 @@
               <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Leetcode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
               <div class="dropdown-content">
                 <a href="/leetcode/difficulty">Difficulty</a>
-                <a href="/hackerearth/stats">Stats</a>
+                <a href="/hackerearth/stats/mentee">Stats</a>
               </div>
             </div>
             <div class="dropdown">
               <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Mentee Profile&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
               <div class="dropdown-content">
-                <a href="/dashboard">Mentor1</a>
-                <a href="/dashboard/1">Mentor2</a>
-                <a href="/dashboard/2">Mentor3</a>
+                <a href="/dashboard">Dashboard</a>
               </div>
             </div>
           </div>
@@ -153,54 +150,56 @@
   const baseUrl   =   "https://competitive-coding-api.herokuapp.com/api/codechef/"
   
   
-      let users   =   ["reejubhai","rudra56","demonblood"]
+      let users   =   ["reejubhai","rudra56","petr","lyrically","maikyh"]
   
-      let ranks  =   []
-      let solveCounts=[]
+      let ratings  =   []
+      let names     =   []
       for(let user of users){
           fetch(baseUrl+user)
               .then(res=>res.json())
               .then(res=>{
                   console.log(res)
                   let name    =   res.user_details.name;
-                  let rank    =   res.global_rank
-                  rank        =   rank    === 'Inactive'?0:Number(rank)
-      
-                  ranks.push(
-                      {
-                          name    :   name,
-                          data    :   [rank]
-                      }
+                  let rating    =   res.rating
+                  let count   =   [res.fully_solved.count,res.partially_solved.count]
+                  // names.push(name)
+                  names.push(name)
+                  ratings.push(
+                      // {
+                      //     name    :   name,
+                      //     data    :   [rating]
+                      // }
+                      [name,rating]
                   )
-               
                   
               }).then(()=>{
                   Highcharts.chart('container', {
-                      chart: {
-                          type: 'bar'
-                      },
-                      title: {
-                          text: 'Ranking'
-                      },
-                      yAxis: {
-                          title: {
-                              text: 'Ranking'
-                          },
-  
-                          // labels: {
-                          //         enabled: true,
-                          //         formatter: function() {
-                          //                 console.log(ranks[this.value]);
-                          //             return ranks[this.value].name;
-                          //             },
-                          //     }
-                      },
-                  
-                      series: [
-                          ...ranks
-                      ]
+                    chart: {
+                        type:'line'
+                        },
+                        title: {
+                        text: 'Rating'
+                    },
+                        xAxis: {
+                            tickInterval: 1,
+                            title:{
+                                text:'Count'
+                            },
+                            labels: {
+                                enabled: true,
+                                formatter: function() { return ratings[this.value][0];},
+                            }
+                        },
+                        yAxis:{
+                            title:{
+                                text:'Ratings',
+                            },
+                        },
+                        series: [{
+                            data: ratings     
+                        }]
               });
-              
+             
               })
               .catch(
                   err=>console.log(err)
@@ -211,23 +210,7 @@
   
           }   
   </script>
-      <script>
-        /* When the user clicks on the button, 
-        toggle between hiding and showing the dropdown content */
-        function myFunction() {
-          document.getElementById("myDropdown").classList.toggle("show");
-        }
-        
-        // Close the dropdown if the user clicks outside of it
-        window.onclick = function(e) {
-          if (!e.target.matches('.dropbtn')) {
-          var myDropdown = document.getElementById("myDropdown");
-            if (myDropdown.classList.contains('show')) {
-              myDropdown.classList.remove('show');
-            }
-          }
-        }
-        </script>
+   
     
 </body>
 </html>

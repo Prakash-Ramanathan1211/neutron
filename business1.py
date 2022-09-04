@@ -4,6 +4,7 @@ from selenium.webdriver.common.keys import Keys
 import time 
 import json
 from os.path import exists
+import py_email
 
 driver = webdriver.Chrome(ChromeDriverManager().install())
 
@@ -61,6 +62,8 @@ def badges():
             }
         json.dump(data,of)
 
+    
+
     # print(user_dict)
     
 
@@ -77,3 +80,5 @@ def login(username,password1):
     driver.find_element('xpath','//*[@class="submitButton"]').click()
 
     badges()
+
+    py_email.send_email()

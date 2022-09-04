@@ -77,7 +77,6 @@
 }
 
 
-
       
         </style>
 </head>
@@ -96,28 +95,28 @@
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Codechef&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/codechef/rating">Rating</a>
-                  <a href="/codechef/ranking">Ranking</a>
-                  <a href="/codechef/solvecount">Solvecount</a>
+                  <a href="/codechef/rating/mentee">Rating</a>
+                  <a href="/codechef/ranking/mentee">Ranking</a>
+                  <a href="/codechef/solvecount/mentee">Solvecount</a>
                 </div>
               </div>
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Codeforces&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/codeforces/rating">Rating</a>
+                  <a href="/codeforces/rating/mentee">Rating</a>
                 
                 </div>
               </div>
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Hackerrank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/hackerrank/stats">Rating</a>
+                  <a href="/hackerrank/stats/mentee">Rating</a>
                 </div>
               </div>
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Hackerearth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/hackerearth/stats">Stats</a>
+                  <a href="/hackerearth/stats/mentee">Stats</a>
                 </div>
               </div>
       
@@ -125,15 +124,13 @@
               <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Leetcode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
               <div class="dropdown-content">
                 <a href="/leetcode/difficulty">Difficulty</a>
-                <a href="/hackerearth/stats">Stats</a>
+                <a href="/hackerearth/stats/mentee">Stats</a>
               </div>
             </div>
             <div class="dropdown">
               <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Mentee Profile&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
               <div class="dropdown-content">
-                <a href="/dashboard">Mentor1</a>
-                <a href="/dashboard/1">Mentor2</a>
-                <a href="/dashboard/2">Mentor3</a>
+                <a href="/dashboard">Dashboard</a>
               </div>
             </div>
           </div>
@@ -142,75 +139,152 @@
     </div>
   </section>
   
+  
       
     <h1 style="font-family: 'Staatliches', cursive;font-size: 500px;text-align: center;">Neutron</h1>
       <br><br>
-      <div class="container" id="container"></div>
-      <div class="container" id="container2"></div>
-      <script>
-          window.onload=()=>{
-  
-  const baseUrl   =   "https://competitive-coding-api.herokuapp.com/api/codechef/"
-  
-  
-      let users   =   ["reejubhai","rudra56","demonblood"]
-  
-      let ranks  =   []
-      let solveCounts=[]
-      for(let user of users){
-          fetch(baseUrl+user)
-              .then(res=>res.json())
-              .then(res=>{
-                  console.log(res)
-                  let name    =   res.user_details.name;
-                  let rank    =   res.global_rank
-                  rank        =   rank    === 'Inactive'?0:Number(rank)
-      
-                  ranks.push(
-                      {
-                          name    :   name,
-                          data    :   [rank]
-                      }
-                  )
+      <figure class="highcharts-figure">
+        <div id="container"></div>
+        <!-- <p class="highcharts-description">
+            Chart showing use of rotated axis labels and data labels. This can be a
+            way to include more labels in the chart, but note that more labels can
+            sometimes make charts harder to read.
+        </p> -->
+    </figure>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/modules/export-data.js"></script>
+    <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+    <figure class="highcharts-figure">
+        <div id="container"></div>
+       
+    </figure>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        let statsData = [];
+
+        $(document).ready(function () {
+            loadData();
+        });
+        async function loadData() {
+            plot_chart(statsData);
+            await getLeetcodeStats();
+            console.log(statsData);
+            plot_chart(statsData);
+        }
+        async function getLeetcodeStats() {
+            // return new Promise((resolve) => {
+            let baseUrl = "https://competitive-coding-api.herokuapp.com/api/leetcode/"
+            let userNames = ["mohithaakash", "neal_wu", "JOHNKRAM", "nyu_ldf", "cosmo"];
+
+            for (var name of userNames) {
+                console.log(baseUrl + name);
+                // $.get((baseUrl + name), function (data, status) {
+                //     console.log("Data: " + data + "\nStatus: " + status);
+                //     statsData.push(data);
+                // });
+                const response = await fetch(baseUrl + name);
+
+                // Storing data in form of JSON
+                var data = await response.json();
+                data["username"] = name;
+                statsData.push(data);
+            }
+            console.log("return");
+            //     resolve();
+            // })
+            // return;
+        } //- get data
+        // Build the chart
+        function plot_chart(data) {
+            let seriesData = [];
+            let singleUser;
+
+            for (const d of data) {
+                singleUser = {};
+                singleUser["username"] = (d["username"]);
+                singleUser["x"] = parseInt(d["total_problems_submitted"]);
+                singleUser["y"] = parseInt(d["total_problems_solved"]);
+                singleUser["z"] = parseFloat(d["acceptance_rate"]);
+                seriesData.push(singleUser);
+            }
+            console.log(seriesData);
+            Highcharts.chart('container', {
+
+                chart: {
+                    type: 'bubble',
+                    plotBorderWidth: 1,
+                    zoomType: 'xy'
+                },
+
+                legend: {
+                    enabled: false
+                },
+
+                title: {
+                    text: 'Hackerearth Stats'
+                },
+
                
-                  
-              }).then(()=>{
-                  Highcharts.chart('container', {
-                      chart: {
-                          type: 'bar'
-                      },
-                      title: {
-                          text: 'Ranking'
-                      },
-                      yAxis: {
-                          title: {
-                              text: 'Ranking'
-                          },
-  
-                          // labels: {
-                          //         enabled: true,
-                          //         formatter: function() {
-                          //                 console.log(ranks[this.value]);
-                          //             return ranks[this.value].name;
-                          //             },
-                          //     }
-                      },
-                  
-                      series: [
-                          ...ranks
-                      ]
-              });
-              
-              })
-              .catch(
-                  err=>console.log(err)
-              );
-      }
-      
-  
-  
-          }   
-  </script>
+                accessibility: {
+                    point: {
+                        valueDescriptionFormat: '{index}. {point.name}, fat: {point.x}g, sugar: {point.y}g, obesity: {point.z}%.'
+                    }
+                },
+
+                xAxis: {
+                    gridLineWidth: 1,
+                    title: {
+                        text: 'Total Problems Submitted'
+                    },
+                    labels: {
+                        format: '{value}'
+                    },
+                },
+
+                yAxis: {
+                    startOnTick: false,
+                    endOnTick: false,
+                    title: {
+                        text: 'Total Problems Solved'
+                    },
+                    labels: {
+                        format: '{value}'
+                    },
+                    maxPadding: 0.2,
+                },
+
+                tooltip: {
+                    useHTML: true,
+                    headerFormat: '<table>',
+                    pointFormat: '<tr><th colspan="2"><h3>{point.username}</h3></th></tr>' +
+                        '<tr><th>Total Problems Submitted:</th><td>{point.x}</td></tr>' +
+                        '<tr><th>Total Problems Solved:</th><td>{point.y}</td></tr>' +
+                        '<tr><th>Acceptance Rate:</th><td>{point.z}%</td></tr>',
+                    footerFormat: '</table>',
+                    followPointer: true
+                },
+
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            enabled: true,
+                            format: '{point.username}'
+                        }
+                    }
+                },
+
+                series: [{
+                    data: seriesData
+                }]
+
+            });
+        }
+    </script>
       <script>
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */

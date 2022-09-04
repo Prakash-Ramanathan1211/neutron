@@ -13,7 +13,7 @@ value = Markup('First line.<br>Second line.<br>')
 cluster = MongoClient('mongodb+srv://prakash-1211:prakash@cluster0.enw9p.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 
 db = cluster["neutron"]
-col = db["user_details"]
+col = db["user_details"] 
 
 app = Flask(__name__)
 
@@ -116,22 +116,58 @@ def leetcode():
 def codechef1():
     return render_template('cc-ranking.html')
 
+@app.route('/codechef/ranking/mentee',methods=['GET'])
+def codechef1_mentee():
+    return render_template('cc-ranking-mentee.html')
+
 @app.route('/codechef/rating',methods=['GET'])
 def codechef2():
     return render_template('cc-rating.html')
+
+@app.route('/codechef/rating/mentee',methods=['GET'])
+def codechef2_mentee():
+    return render_template('cc-rating-mentee.html')
 
 @app.route('/codechef/solvecount',methods=['GET'])
 def codechef3():
     return render_template('cc-solvecount.html')
 
+@app.route('/codechef/solvecount/mentee',methods=['GET'])
+def codechef3_mentee():
+    return render_template('cc-solvecount-mentee.html')
+
 @app.route('/leetcode/difficulty',methods=['GET'])
 def leetcode1():
     return render_template('leetcode-difficulty.html')
+
 
 @app.route('/codeforces/rating',methods=['GET'])
 def codeforces():
     return render_template('cf-rating.html')
 
+@app.route('/hackerearth/stats',methods=['GET'])
+def leetcode_stats():
+    return render_template('leetcode-stats.html')
+
+@app.route('/hackerearth/stats/mentee',methods=['GET'])
+def leetcode_stats_mentee():
+    return render_template('leetcode-stats-mentee.html')
+
+@app.route('/hackerrank/stats',methods=['GET'])
+def hackerrank_stats():
+    return render_template('hackerrank-stats.html')
+
+@app.route('/hackerrank/stats/mentee',methods=['GET'])
+def hackerrank_stats_mentee():
+    return render_template('hackerrank-stats-mentee.html')
+
+@app.route('/dashboard/1',methods=['GET'])
+def dashboard1():
+    return render_template('dashboard-user1.html')
+
+@app.route('/dashboard/2',methods=['GET'])
+def dashboard2():
+    return render_template('dashboard-user2.html')
 
 @app.route('/api/codeforces',methods=['GET'])
 def get_codeforces_data():
@@ -147,13 +183,20 @@ def get_hackerearth_data():
     with open("hackerearth.json") as f:
         data = json.load(f)
     res=[]
+    points = data["users"][0]["@mohithaakash17"]["points"]
+
+    points = int(points)
     for d in data["users"]:
+        # if points
         print(d)  
         print(d.keys()) 
 
         res.append([d.keys()])
     return jsonify(res)
 
+@app.route('/dashboard',methods=['GET'])
+def dashboard():
+    return render_template('dashboard.html')
 
 if __name__ == "__main__":
    

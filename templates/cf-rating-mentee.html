@@ -77,7 +77,6 @@
 }
 
 
-
       
         </style>
 </head>
@@ -96,28 +95,28 @@
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Codechef&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/codechef/rating">Rating</a>
-                  <a href="/codechef/ranking">Ranking</a>
-                  <a href="/codechef/solvecount">Solvecount</a>
+                  <a href="/codechef/rating/mentee">Rating</a>
+                  <a href="/codechef/ranking/mentee">Ranking</a>
+                  <a href="/codechef/solvecount/mentee">Solvecount</a>
                 </div>
               </div>
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Codeforces&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/codeforces/rating">Rating</a>
+                  <a href="/codeforces/rating/mentee">Rating</a>
                 
                 </div>
               </div>
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Hackerrank&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/hackerrank/stats">Rating</a>
+                  <a href="/hackerrank/stats/mentee">Rating</a>
                 </div>
               </div>
               <div class="dropdown">
                 <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Hackerearth&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
                 <div class="dropdown-content">
-                  <a href="/hackerearth/stats">Stats</a>
+                  <a href="/hackerearth/stats/mentee">Stats</a>
                 </div>
               </div>
       
@@ -125,15 +124,13 @@
               <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Leetcode&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
               <div class="dropdown-content">
                 <a href="/leetcode/difficulty">Difficulty</a>
-                <a href="/hackerearth/stats">Stats</a>
+                <a href="/hackerearth/stats/mentee">Stats</a>
               </div>
             </div>
             <div class="dropdown">
               <button class="dropbtn"><p style="font-family: 'Staatliches', cursive;font-size: 25px;padding-top: 20px;">Mentee Profile&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></button>
               <div class="dropdown-content">
-                <a href="/dashboard">Mentor1</a>
-                <a href="/dashboard/1">Mentor2</a>
-                <a href="/dashboard/2">Mentor3</a>
+                <a href="/dashboard">Dashboard</a>
               </div>
             </div>
           </div>
@@ -142,75 +139,95 @@
     </div>
   </section>
   
+  
       
     <h1 style="font-family: 'Staatliches', cursive;font-size: 500px;text-align: center;">Neutron</h1>
       <br><br>
-      <div class="container" id="container"></div>
-      <div class="container" id="container2"></div>
-      <script>
-          window.onload=()=>{
-  
-  const baseUrl   =   "https://competitive-coding-api.herokuapp.com/api/codechef/"
-  
-  
-      let users   =   ["reejubhai","rudra56","demonblood"]
-  
-      let ranks  =   []
-      let solveCounts=[]
-      for(let user of users){
-          fetch(baseUrl+user)
-              .then(res=>res.json())
-              .then(res=>{
-                  console.log(res)
-                  let name    =   res.user_details.name;
-                  let rank    =   res.global_rank
-                  rank        =   rank    === 'Inactive'?0:Number(rank)
-      
-                  ranks.push(
-                      {
-                          name    :   name,
-                          data    :   [rank]
-                      }
-                  )
-               
-                  
-              }).then(()=>{
-                  Highcharts.chart('container', {
-                      chart: {
-                          type: 'bar'
-                      },
-                      title: {
-                          text: 'Ranking'
-                      },
-                      yAxis: {
-                          title: {
-                              text: 'Ranking'
-                          },
-  
-                          // labels: {
-                          //         enabled: true,
-                          //         formatter: function() {
-                          //                 console.log(ranks[this.value]);
-                          //             return ranks[this.value].name;
-                          //             },
-                          //     }
-                      },
-                  
-                      series: [
-                          ...ranks
-                      ]
-              });
-              
-              })
-              .catch(
-                  err=>console.log(err)
-              );
-      }
-      
-  
-  
-          }   
-  </script>
+      <figure class="highcharts-figure">
+        <div id="container"></div>
+        <!-- <p class="highcharts-description">
+            Chart showing use of rotated axis labels and data labels. This can be a
+            way to include more labels in the chart, but note that more labels can
+            sometimes make charts harder to read.
+        </p> -->
+    </figure>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function () {
+            get_data();
+        });
+
+        function get_data() {
+            url = "/api/codeforces"
+            // var myusername = $("#username").val();
+            $.ajax({
+                type: "GET",
+                url: url,
+                // data: myusername,
+                cache: false,
+                success: function (data) {
+                    // $("#resultarea").text(data);
+                    console.log(data);
+                    plot_chart(data);
+                }
+            });
+        } //- get data
+        // Build the chart
+        function plot_chart(data) {
+
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Codeforces Rating Graph'
+                },
+                subtitle: {
+                    text: ''
+                },
+                xAxis: {
+                    type: 'category',
+                    labels: {
+                        rotation: -45,
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                },
+                yAxis: {
+                    min: 0,
+                    title: {
+                        text: 'Rating (points)'
+                    }
+                },
+                legend: {
+                    enabled: false
+                },
+                tooltip: {
+                    pointFormat: 'Rating: <b>{point.y:.1f} points</b>'
+                },
+                series: [{
+                    name: 'Rating',
+                    data: data,
+                    dataLabels: {
+                        enabled: true,
+                        rotation: -90,
+                        color: '#FFFFFF',
+                        align: 'right',
+                        y: 10, // 10 pixels down from the top
+                        style: {
+                            fontSize: '13px',
+                            fontFamily: 'Verdana, sans-serif'
+                        }
+                    }
+                }]
+            });
+        }
+    </script>
       <script>
         /* When the user clicks on the button, 
         toggle between hiding and showing the dropdown content */
